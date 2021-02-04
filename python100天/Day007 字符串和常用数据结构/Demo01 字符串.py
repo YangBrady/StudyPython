@@ -95,6 +95,7 @@ def string_function():
     # 获得字符串修剪左右两侧空格之后的拷贝
     print(str3.strip())
 
+    # 格式化输出
     a, b = 5, 10
     print('{0} * {1} = {2}'.format(a, b, a * b))  # 格式化输出
     print(f'{a} * {b} = {a * b}')  # Python 3.6+
