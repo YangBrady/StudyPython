@@ -1,13 +1,13 @@
-class TargetNode:
+class TargetFileEntity:
     def __init__(self):
         self._node_name = None
         self._target_lon = None
         self._target_lat = None
-        self._direction = None
+        self._direction = {}
 
     @property
     def node_name(self):
-        return self.node_name()
+        return self._node_name
 
     @node_name.setter
     def node_name(self, node_name):
@@ -15,7 +15,7 @@ class TargetNode:
 
     @property
     def target_lon(self):
-        return self.target_lon()
+        return self._target_lon
 
     @target_lon.setter
     def target_lon(self, target_lon):
@@ -23,7 +23,7 @@ class TargetNode:
 
     @property
     def target_lat(self):
-        return self.target_lat()
+        return self._target_lat
 
     @target_lat.setter
     def target_lat(self, target_lat):
@@ -31,7 +31,7 @@ class TargetNode:
 
     @property
     def direction(self):
-        return self.direction()
+        return self._direction
 
     @direction.setter
     def direction(self, direction):

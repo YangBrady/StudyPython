@@ -1,4 +1,4 @@
-class NodeEntity:
+class NodeFileEntity:
     def __init__(self):
         self._NodeID = None
         self._x = None

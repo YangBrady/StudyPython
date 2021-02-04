@@ -1,23 +1,24 @@
 import logging
 import pandas as pd
 from lxml import etree
-from opendrive2lanelet.opendriveparser.parser import parse_opendrive
 import sys
 
 sys.path.append("..")
 import common.utils as utils
-from entity.TargetEntity import TargetNode
-from entity.NodeEntity import NodeEntity
+from entity.TargetEntity import TargetFileEntity
+from entity.NodeEntity import NodeFileEntity
 from odrCoorTransform import (
     enuCoorTransform, commonCoorTransform)
+from opendrive2lanelet.opendriveparser.parser import parse_opendrive
 
 
 def parse_junction(inputFile, outputDir, Node_ID, nodeCsvFile, targetCsvFile):
     # 读取roadList
     with open(targetCsvFile, 'r', encoding='utf-8') as f:
-        nodes = pd.read_csv(f, dtype={'link_North': str, 'link_East': str, 'link_South': str, 'link_West': str})
-    nodes = nodes.where(nodes.notnull(), None)  # 将NaN转换成None
-    target_node_map, road_list = get_target_node_map(nodes)
+        target_data_frame = pd.read_csv(f, dtype={'link_North': str, 'link_East': str, 'link_South': str,
+                                                  'link_West': str})
+    target_data_frame = target_data_frame.where(target_data_frame.notnull(), None)  # 将NaN转换成None
+    target_node_map, road_list_map = get_target_node_map(target_data_frame)
 
     o_step_length = 5
     with open(inputFile, 'r', encoding='utf-8') as fh:
@@ -25,7 +26,7 @@ def parse_junction(inputFile, outputDir, Node_ID, nodeCsvFile, targetCsvFile):
 
     ivics_road = list()
     open_drive_road_ids = {road.id: road for road in open_drive.roads}
-    for r in road_list:
+    for r in road_list_map:
         if open_drive_road_ids.get(r) is not None:
             ivics_road.append(r)
     #
@@ -341,28 +342,29 @@ def mkdir(inputFile, outputDir, Node_ID):
     utils.mkdir(outputDir + "/" + utils.getFileName(inputFile) + "_" + str(Node_ID))
 
 
-def get_target_node_map(nodes):
+def get_target_node_map(target_data_frame):
     target_node_map = {}
+    road_list_map = {}
     road_list = []
 
     # 将各个方向的Link集合装到一个map
-    for row in nodes.iterrows():
-        target_node = TargetNode()
-        target_node.node_name = row[1]['Node_Name']
-        target_node.target_lon = row[1]['target_lon']
-        target_node.target_lat = row[1]['target_lat']
+    for row in target_data_frame.iterrows():
+        target_file_entity = TargetFileEntity()
+        target_file_entity.node_name = row[1]['Node_Name']
+        target_file_entity.target_lon = row[1]['target_lon']
+        target_file_entity.target_lat = row[1]['target_lat']
         for direction in ["link_East", "link_South", "link_West", "link_North"]:
             direction_links = row[1][direction]
             if direction_links is not None:
-                target_node.direction = direction_links.split(',')
-                logging.info("target_node.direction=" + target_node.direction)
-                # road_list += target_node.direction
-
+                target_file_entity.direction[direction] = direction_links.split(',')
+                road_list = road_list + target_file_entity.direction[direction]
+                # logging.info("target_file_entity.direction=" + str(target_file_entity.direction))
         curr_node_id = row[1]['NodeID']
-        target_node_map[curr_node_id] = target_node
+        target_node_map[curr_node_id] = target_file_entity
 
         road_list = [int(i) for i in road_list]
-    return target_node_map, road_list
+        road_list_map[curr_node_id] = road_list
+    return target_node_map, road_list_map
 
 
 def get_node_xyz(Node_ID, nodeCsvFile):
@@ -385,15 +387,15 @@ def get_node_xyz_map(nodeCsvFile):
         nodecv = nodecv.where(nodecv.notnull(), None)
     node_xyz_map = {}
     for row in nodecv.iterrows():
-        node_entity = NodeEntity()
-        node_entity.NodeID = row[1]['NodeID']
-        node_entity.x = row[1]['x']
-        node_entity.y = row[1]['y']
-        node_entity.z = row[1]['z']
-        node_entity.NodeType = row[1]['NodeType']
-        node_entity.lng = row[1]['lng']
-        node_entity.lat = row[1]['lat']
-        node_entity.alt = row[1]['alt']
+        node_file_entity = NodeFileEntity()
+        node_file_entity.NodeID = row[1]['NodeID']
+        node_file_entity.x = row[1]['x']
+        node_file_entity.y = row[1]['y']
+        node_file_entity.z = row[1]['z']
+        node_file_entity.NodeType = row[1]['NodeType']
+        node_file_entity.lng = row[1]['lng']
+        node_file_entity.lat = row[1]['lat']
+        node_file_entity.alt = row[1]['alt']
     return node_xyz_map
 
 # def cc(target_node_map):
