@@ -20,7 +20,8 @@ def use_dict():
 
     # 通过键可以获取字典中对应的值
     print(scores['小明'])
-    print(scores['狄仁杰'])
+    print(scores.get('小明'))
+    print(scores.get('小天', 89))  # 不存在的话返回默认值
 
     # 对字典中所有键值对进行遍历
     for key in scores:
@@ -33,9 +34,6 @@ def use_dict():
     if '武则天' in scores:
         print(scores['武则天'])
     print(scores.get('武则天'))
-
-    # get方法也是通过键获取对应的值但是可以设置默认值
-    print("武则天的成绩:", scores.get('武则天', 60))
 
     # 删除字典中的元素
     print(scores.popitem())
