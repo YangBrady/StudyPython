@@ -1,7 +1,8 @@
 class Student(object):
+    grade = 3  # 类变量
 
     # __init__是一个特殊方法用于在创建对象时进行初始化操作
-    # 通过这个方法我们可以为学生对象绑定name和age两个属性
+    # 通过这个方法我们可以为学生对象绑定name和age两个实例属性
     def __init__(self, name, age):
         self.name = name
         self.age = age
@@ -19,6 +20,8 @@ class Student(object):
 
 
 def main():
+    print('Student.grade=', Student.grade)
+
     # 创建学生对象并指定姓名和年龄
     stu1 = Student('喜洋洋', 12)
     # 给对象发study消息
