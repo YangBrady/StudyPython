@@ -6,8 +6,9 @@ def main():
     # list_define()
     # list_loop()
     # list_add_remove()
+    list_cut()
     # list_sort()
-    list_gen()
+    # list_gen()
 
 
 def list_define():
@@ -78,21 +79,24 @@ def list_add_remove():
     print(list1)  # []
 
 
-# 列表分片
+# 列表分片，字符串也可以进行切片操作
 def list_cut():
     fruits = ['grape', 'apple', 'strawberry', 'waxberry']
     fruits += ['pitaya', 'pear', 'mango']
     # 列表分片
-    fruits2 = fruits[1:4]
+    fruits2 = fruits[1:4]  # 前闭后开区间
     print(fruits2)  # apple strawberry waxberry
     # 可以通过完整分片操作来复制列表
     fruits3 = fruits[:]
     print(fruits3)  # ['grape', 'apple', 'strawberry', 'waxberry', 'pitaya', 'pear', 'mango']
     fruits4 = fruits[-3:-1]
     print(fruits4)  # ['pitaya', 'pear']
+    # 每隔2个取一个
+    fruits5 = fruits[::2]
+    print(fruits5)  # ['grape', 'strawberry', 'pitaya', 'mango']
     # 可以通过反向分片操作来获得倒转后的列表的拷贝
-    fruits5 = fruits[::-1]
-    print(fruits5)  # ['mango', 'pear', 'pitaya', 'waxberry', 'strawberry', 'apple', 'grape']
+    fruits6 = fruits[::-1]
+    print(fruits6)  # ['mango', 'pear', 'pitaya', 'waxberry', 'strawberry', 'apple', 'grape']
 
 
 # 列表排序
