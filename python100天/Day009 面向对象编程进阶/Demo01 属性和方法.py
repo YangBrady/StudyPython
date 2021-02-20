@@ -46,7 +46,7 @@ class Student2(object):
 
     @property
     def name(self):
-        return self.name()
+        return self._name
 
     @name.setter
     def name(self, name):
@@ -54,7 +54,7 @@ class Student2(object):
 
     @property
     def age(self):
-        return self.age()
+        return self._age
 
     @age.setter
     def age(self, age):
