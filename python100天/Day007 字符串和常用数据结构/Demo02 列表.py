@@ -123,13 +123,12 @@ def list_sort():
 
 # 生成式和生成器，一个式中括号一个式小括号
 def list_gen():
+    # 用列表的生成表达式语法创建列表容器
+    # 用这种语法创建列表之后元素已经准备就绪所以需要耗费较多的内存空间
     f = [x for x in range(1, 10)]
     print("f=", f)
     f = [x + y for x in 'ABCDE' for y in '1234567']
     print("f=", f)
-
-    # 用列表的生成表达式语法创建列表容器
-    # 用这种语法创建列表之后元素已经准备就绪所以需要耗费较多的内存空间
     f = [x ** 2 for x in range(1, 10)]  # **表示乘方
     print("f占用内存的字节数", sys.getsizeof(f))
     print("f=", f)
