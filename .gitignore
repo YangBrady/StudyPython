@@ -117,3 +117,4 @@ dmypy.json
 # 我的忽略列表
 */__init__.py
 /.idea/
+/.vscode/

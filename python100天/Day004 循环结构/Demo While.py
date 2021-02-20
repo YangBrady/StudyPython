@@ -12,6 +12,6 @@ while True:
     else:
         print('恭喜你猜对了!')
         break  # break和continue用法和Java一样
-print('你总共猜了%d次' % counter)
+print('你总共猜了%d次' %counter)
 if counter > 7:
     print('你的智商余额明显不足')

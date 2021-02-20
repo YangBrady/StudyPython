@@ -7,7 +7,7 @@ class Student(object):
     # 访问器
     @property
     def name(self):
-        return self.name()
+        return self._name
 
     # 修改器
     @name.setter
@@ -16,7 +16,7 @@ class Student(object):
 
     @property
     def age(self):
-        return self.age()
+        return self._age
 
     @age.setter
     def age(self, age):
@@ -61,10 +61,23 @@ class Student2(object):
         self._age = age
 
 
+def list_test():
+    students = []
+    student2_1 = Student2("JOJO", 18)
+    student2_2 = Student2("NONO", 19)
+    student2_3 = Student2("BOBO", 20)
+    students.append(student2_1)
+    students.append(student2_2)
+    students.append(student2_3)
+    for student in students:
+        print(student)
+
+
 def main():
     student = Student("JOJO", 10)
     student.play()
-    student.age = 22
+    var = student.age  # 实际转化为s.get_score()
+    student.age = 22  # 实际转化为s.set_score(22)
     student.play()
 
     Student.is_adult(student)
@@ -74,6 +87,8 @@ def main():
 
     # student2 = Student2("KOKO", 20)
     # student2.foo = 1  # 会报错
+
+    list_test()
 
 
 if __name__ == '__main__':
