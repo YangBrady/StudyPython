@@ -6,6 +6,8 @@ def main():
 
 
 def set_define():
+    # 定义一个空set
+    set_null = set()
     # 创建集合的字面量语法
     set1 = {1, 2, 3, 3, 3, 2}
     print("set1 =", set1)
@@ -38,7 +40,7 @@ def set_add_remove():
 
 
 def set_calculate():
-    set1 = {1, 2, 3}
+    set1 = {0, 1, 2, 3}
     set2 = set(range(1, 10))
     set3 = {1, 2, 3}
     # 集合的交集、并集、差集、对称差运算

@@ -9,12 +9,14 @@ class ClassName:
     #     self._link_South = []
     #     self._link_West = []
     #     self._link_North = []
+    # def __init__(self):
+    #     self.__link_East = []
+    #     self.__link_South = []
+    #     self.__link_West = []
+    #     self.__link_North = []
     def __init__(self):
-        self.__link_East = []
-        self.__link_South = []
-        self.__link_West = []
-        self.__link_North = []
-
+        self.__upLane = []
+        self.__downLane = []
 
 def foo1():
     clazz = ClassName()

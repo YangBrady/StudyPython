@@ -99,6 +99,7 @@ def list_cut():
     print(fruits6)  # ['mango', 'pear', 'pitaya', 'waxberry', 'strawberry', 'apple', 'grape']
 
 
+
 # 列表排序
 def list_sort():
     list1 = ['orange', 'apple', 'zoo', 'internationalization', 'blueberry']
